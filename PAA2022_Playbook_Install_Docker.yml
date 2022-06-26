@@ -1,0 +1,56 @@
+---
+- hosts: all
+  become: true
+
+  tasks:
+    - name: Installation d'aptitude
+      apt:
+        name: aptitude
+        state: latest
+        update_cache: true
+
+    - name: Installation des paquets nécessaire
+      apt:
+        pkg:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+          - python3-pip
+          - virtualenv
+          - python3-setuptools
+        state: latest
+        update_cache: true
+
+    - name: Ajout de la clé GPG apt Docker
+      apt_key:
+        url: https://download.docker.com/linux/debian/gpg
+        state: present
+
+    - name: Ajout du dépot Docker
+      apt_repository:
+        repo: deb https://download.docker.com/linux/debian focal stable
+        state: present
+
+    - name: Installation de docker-ce
+      apt:
+        name: docker-ce
+        state: latest
+        update_cache: true
+
+    - name: Installation du module Python pour Docker
+      pip:
+        name: docker
+    
+    - name: Installation Docker-Compose
+      apt:
+        name: docker-compose-plugin
+        state: latest
+        update_cache: true
+    
+    - name: Déploiement des conteneurs Docker
+      community.docker.docker_compose:
+        project_src: /somewhere/yourproject
+        files:
+        - docker-compose.yml
+        - docker-compose.prod.yml
