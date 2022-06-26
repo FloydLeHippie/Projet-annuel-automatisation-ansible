@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #Commenter la source cdrom
 sudo sed -e '/cdrom/s/^/#/g' -i /etc/apt/sources.list
 
