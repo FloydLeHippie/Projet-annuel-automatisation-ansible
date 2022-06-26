@@ -7,7 +7,7 @@ read -e -p "Entrez le masque de sous réseau :" MASK
 read -e -p "Entrez la passerelle :" GW
 read -e -p "Entrez l'adresse ip du DNS :" DNS
 
-sudo echo " # The loopback network interface
+echo " # The loopback network interface
 auto lo
 iface lo inet loopback
 #The primary network interface
@@ -17,7 +17,7 @@ iface ${Nicname}  inet static
  netmask ${MASK}
  gateway ${GW}
  dns-nameservers ${DNS}
-">> /etc/network/interfaces
+">> | sudo tee /etc/network/interfaces
 
 #Commenter la source cdrom
 sudo sed -e '/cdrom/s/^/#/g' -i /etc/apt/sources.list
