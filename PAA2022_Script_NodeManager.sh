@@ -1,3 +1,24 @@
+#!/bin/bash
+
+$NicName=ls -I "lo" /sys/class/net
+
+read -e -p "Entrez l'adresse ip :" IP
+read -e -p "Entrez le masque de sous réseau :" MASK
+read -e -p "Entrez la passerelle :" GW
+read -e -p "Entrez l'adresse ip du DNS :" DNS
+
+sudo echo " # The loopback network interface
+auto lo
+iface lo inet loopback
+#The primary network interface
+auto ${NicName}
+iface ${Nicname}  inet static
+ address ${IP}
+ netmask ${MASK}
+ gateway ${GW}
+ dns-nameservers ${DNS}
+">> /etc/network/interfaces
+
 #Commenter la source cdrom
 sudo sed -e '/cdrom/s/^/#/g' -i /etc/apt/sources.list
 
