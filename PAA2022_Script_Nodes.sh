@@ -14,3 +14,5 @@ sudo adduser --shell /bin/bash --gecos "" ansible
 echo "ansible ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
 
 sudo usermod -L ansible
+
+hostname -I
