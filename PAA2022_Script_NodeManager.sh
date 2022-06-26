@@ -1,6 +1,6 @@
 #!/bin/bash
 
-$NicName=ls -I "lo" /sys/class/net
+$NicName=$(ls -I "lo" /sys/class/net)
 
 read -e -p "Entrez l'adresse ip :" IP
 read -e -p "Entrez le masque de sous réseau :" MASK
@@ -12,12 +12,12 @@ auto lo
 iface lo inet loopback
 #The primary network interface
 auto ${NicName}
-iface ${Nicname}  inet static
+iface ${NicName}  inet static
  address ${IP}
  netmask ${MASK}
  gateway ${GW}
  dns-nameservers ${DNS}
-">> | sudo tee /etc/network/interfaces
+" | tee /etc/network/interfaces
 
 #Commenter la source cdrom
 sudo sed -e '/cdrom/s/^/#/g' -i /etc/apt/sources.list
@@ -47,6 +47,6 @@ sudo echo "$IP1
 $IP2
 $IP3" >> ./PAA2022_hosts.txt
 
-sudo ansible-playbook -u ansible PAA2022_Playbook_Install_Docker.yml
+sudo ansible-playbook -i hosts.txt -u ansible PAA2022_Playbook_Install_Docker.yml
 sudo ansible-playbook -u ansible PAA2022_Playbook_"".yml
 sudo ansible-playbook -u ansible PAA2022_Playbook_"".yml
