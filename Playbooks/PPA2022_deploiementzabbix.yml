@@ -1,0 +1,48 @@
+---
+- name: Playbook d'installation de zabbix
+  hosts: ServeurZabbix
+  become: true
+  tasks:
+
+  - name: Installation Apache et PHP
+    apt:
+      pkg: 
+        - apache2 
+        - php 
+        - php-mysql 
+        - php-mysqlnd 
+        - php-ldap 
+        - php-bcmath 
+        - php-mbstring 
+        - php-gd 
+        - php-pdo 
+        - php-xml 
+        - libapache2-mod-php
+      state: present
+
+  - name: Installation MariaDB
+    apt:
+      name: 
+        - mariadb-server 
+        - mariadb-client
+      state: present
+
+  - name: Installation du dépot 1
+    shell: 'wget --no-check-certificate https://repo.zabbix.com/zabbix/5.4/debian/pool/main/z/zabbix-release/zabbix-release_5.4-1+debian11_all.deb'
+
+  - name: Installation du dépot 2
+    shell: 'dpkg -i zabbix-release_5.4-1+debian11_all.deb'
+
+  - name: Installation du dépot 3
+    shell: 'apt update'
+
+  - name: Installation du paquet Zabbix
+    apt:
+      name: 
+        - zabbix-server-mysql 
+        - zabbix-frontend-php 
+        - zabbix-apache-conf 
+        - zabbix-sql-scripts 
+        - zabbix-agent
+      state: present
+
