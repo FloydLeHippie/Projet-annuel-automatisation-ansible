@@ -45,8 +45,8 @@ sudo ssh-copy-id ansible@${IP3} -y
 #Créeation du fichier hosts
 sudo echo "Node1=$IP1
 Node2=$IP2
-Node3=$IP3" >> ./PAA2022_hosts.txt
+Node3=$IP3" >> /home/Projet_Ansible/Playbooks/PAA2022_hosts
 
-sudo ansible-playbook -i PAA2022_hosts -u ansible PAA2022_Playbook_Install_Docker.yml
-sudo ansible-playbook -i PAA2022_hosts -u ansible PAA2022_Playbook_PAA2022_Playbook_ZabbixAgent.yml
-sudo ansible-playbook -i PAA2022_hosts -u ansible PAA2022_Playbook_.yml
+sudo ansible-playbook -i PAA2022_hosts -u ansible /home/Projet_Ansible/Playbooks/PAA2022_Playbook_Install_Docker.yml
+sudo ansible-playbook -i PAA2022_hosts -u ansible /home/Projet_Ansible/Playbooks/PAA2022_Playbook_PAA2022_Playbook_ZabbixAgent.yml
+sudo ansible-playbook -i PAA2022_hosts -u ansible /home/Projet_Ansible/Playbooks/PPA2022_Playbook_Deploiement_Serveur_Zabbix.yml
