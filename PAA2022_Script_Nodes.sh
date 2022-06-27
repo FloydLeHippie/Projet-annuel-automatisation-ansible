@@ -1,6 +1,6 @@
 #!/bin/bash
 
-$NicName=$(ls -I "lo" /sys/class/net)
+NicName=$(ls -I "lo" /sys/class/net)
 
 read -e -p "Entrez l'adresse ip :" IP
 read -e -p "Entrez le masque de sous réseau :" MASK
@@ -17,22 +17,22 @@ iface ${NicName}  inet static
  netmask ${MASK}
  gateway ${GW}
  dns-nameservers ${DNS}
-" | tee /etc/network/interfaces
+" | sudo tee /etc/network/interfaces
 
 #Commenter la source cdrom
-sed -e '/cdrom/s/^/#/g' -i /etc/apt/sources.list
+sudo sed -e '/cdrom/s/^/#/g' -i /etc/apt/sources.list
 
 #Rajouter la source bullseye-back-ports
-echo "deb http://deb.debian.org/debian/ bullseye-backports main contrib" | tee -a /etc/apt/sources.list
+echo "deb http://deb.debian.org/debian/ bullseye-backports main contrib" | sudo tee -a /etc/apt/sources.list
 
 #Mise à jours de la liste des paquets
-apt update
+sudo apt update
 
 #Ajout d'un utilisateur ansible
-adduser --shell /bin/bash --gecos "" ansible
+sudo adduser --shell /bin/bash --gecos "" ansible
 
 #Authorisation sudo sans mdp pour l'utilisateur ansible 
-echo "ansible ALL=(ALL) NOPASSWD:ALL" | tee -a /etc/sudoers
+echo "ansible ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
 
 sudo usermod -L ansible
 
