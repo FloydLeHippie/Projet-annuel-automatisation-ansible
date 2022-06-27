@@ -12,8 +12,12 @@
                    src: PAA2022_zabbixagent.conf
                    dest: /etc/zabbix/zabbix_agentd.conf
 
-
           notify: Redemarrer-agent
+        
+        - name: Demarrage service zabbix-agent
+          service:
+                  name: zabbix-agent
+                  state: started
 
   handlers:
             - name: Redemarrer-agent
