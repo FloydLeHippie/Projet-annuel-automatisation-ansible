@@ -36,11 +36,11 @@ sudo ssh-keygen
 
 #Copie de la clé publique ssh sur les hôtes ansible
 read -e -p "Entrez l'adresse ip du node 1 :" IP1
-sudo ssh-copy-id ansible@${IP1} -y
+sudo ssh-copy-id ansible@$IP1
 read -e -p "Entrez l'adresse ip du node 2 :" IP2
-sudo ssh-copy-id ansible@${IP2} -y
+sudo ssh-copy-id ansible@$IP2
 read -e -p "Entrez l'adresse ip du node 3 :" IP3
-sudo ssh-copy-id ansible@${IP3} -y
+sudo ssh-copy-id ansible@$IP3
 
 #Créeation du fichier hosts
 sudo echo "Node1=$IP1
