@@ -49,6 +49,22 @@
     - name: "Run a shell command on a remote host"
       shell: docker network create -d bridge Serveur
     
+    - name: Configuration de l'agent zabbix
+      template:
+               src: /home/Projet_Ansible/Docker/docker-compose.nextcloud.yml
+               dest: /home/Projet_Ansible/Docker
+
+    - name: Configuration de l'agent zabbix
+      template:
+               src: /home/Projet_Ansible/Docker/docker-compose.nginxproxymanager.yml
+               dest: /home/Projet_Ansible/Docker
+
+
+    - name: Configuration de l'agent zabbix
+      template:
+               src: /home/Projet_Ansible/Docker/.env
+               dest: /home/Projet_Ansible/Docker
+    
     - name: Déploiement des conteneurs Docker
       community.docker.docker_compose:
         project_src: /home/Projet_Ansible/Docker
