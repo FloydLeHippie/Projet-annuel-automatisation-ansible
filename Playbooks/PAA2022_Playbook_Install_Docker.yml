@@ -45,6 +45,9 @@
     - name: Installation Docker-Compose
       pip:
         name: docker-compose
+        
+    - name: "Run a shell command on a remote host"
+      shell: docker network create -d bridge Serveur
     
     - name: Déploiement des conteneurs Docker
       community.docker.docker_compose:
